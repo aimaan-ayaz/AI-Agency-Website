@@ -1,0 +1,103 @@
+﻿
+> web@0.1.0 build
+> next build
+
+  Γû▓ Next.js 14.2.35
+
+   Creating an optimized production build ...
+node.exe : <w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 
+'Compilation/modules|C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\node_modules\next\dist\build\webpack\loaders\css-l
+oader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[2]!C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\node_modules\
+next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[3]!C:\Users\iamai\OneDr
+ive\Desktop\Zaid Agency\web\src\app\globals.css': No serializer registered for PostCSSSyntaxError
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (<w> [webpack.ca...tCSSSyntaxError:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> 
+webpack/lib/ModuleBuildError -> PostCSSSyntaxError
+Failed to compile.
+
+./src/app/globals.css:3:1
+Syntax error: C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\src\app\globals.css The `border-border` class does not 
+exist. If `border-border` is a custom class, make sure it is defined within a `@layer` directive.
+
+ [90m 1 | [39m[36m@import[39m [32m"tw-animate-css"[39m[33m;[39m
+ [90m 2 | [39m[36m@import[39m [32m"shadcn/tailwind.css"[39m[33m;[39m
+[1m[31m>[39m[22m[90m 3 | [39m[36m@tailwind[39m base[33m;[39m
+ [90m   | [39m[1m[31m^[39m[22m
+ [90m 4 | [39m[36m@tailwind[39m components[33m;[39m
+ [90m 5 | [39m[36m@tailwind[39m utilities[33m;[39m
+
+./src/app/globals.css
+Syntax error: C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\src\app\globals.css The `border-border` class does not 
+exist. If `border-border` is a custom class, make sure it is defined within a `@layer` directive. (3:1)
+
+ [90m 1 | [39m[36m@import[39m [32m"tw-animate-css"[39m[33m;[39m
+ [90m 2 | [39m[36m@import[39m [32m"shadcn/tailwind.css"[39m[33m;[39m
+[1m[31m>[39m[22m[90m 3 | [39m[36m@tailwind[39m base[33m;[39m
+ [90m   | [39m[1m[31m^[39m[22m
+ [90m 4 | [39m[36m@tailwind[39m components[33m;[39m
+ [90m 5 | [39m[36m@tailwind[39m utilities[33m;[39m
+
+    at tryRunOrWebpackError (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:28:312989)
+    at __webpack_require_module__ (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:28:131165)
+    at __nested_webpack_require_153728__ (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:28:130607)
+    at C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:28:131454
+    at symbolIterator (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\neo-async\async.js:1:14444)
+    at done (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\neo-async\async.js:1:14824)
+    at Hook.eval [as callAsync] (eval at create (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:13:28858), <anonymous>:15:1)
+    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:13:26012)
+    at C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:28:130328
+    at symbolIterator (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\neo-async\async.js:1:14402)
+-- inner error --
+Syntax error: C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\src\app\globals.css The `border-border` class does not 
+exist. If `border-border` is a custom class, make sure it is defined within a `@layer` directive. (3:1)
+
+ [90m 1 | [39m[36m@import[39m [32m"tw-animate-css"[39m[33m;[39m
+ [90m 2 | [39m[36m@import[39m [32m"shadcn/tailwind.css"[39m[33m;[39m
+[1m[31m>[39m[22m[90m 3 | [39m[36m@tailwind[39m base[33m;[39m
+ [90m   | [39m[1m[31m^[39m[22m
+ [90m 4 | [39m[36m@tailwind[39m components[33m;[39m
+ [90m 5 | [39m[36m@tailwind[39m utilities[33m;[39m
+
+    at Object.<anonymous> (C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\node_modules\next\dist\build\webpack\loaders
+\css-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[2]!C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\node_mo
+dules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[3]!C:\Users\iamai
+\OneDrive\Desktop\Zaid Agency\web\src\app\globals.css:1:7)
+    at C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:28:922493
+    at Hook.eval [as call] (eval at create (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:13:28636), <anonymous>:7:1)
+    at Hook.CALL_DELEGATE [as _call] (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:13:25906)
+    at C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:28:131198
+    at tryRunOrWebpackError (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:28:312943)
+    at __webpack_require_module__ (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:28:131165)
+    at __nested_webpack_require_153728__ (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:28:130607)
+    at C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\node_modules\next\dist\compiled\webpack\bundle5.js:28:131454
+    at symbolIterator (C:\Users\iamai\OneDrive\Desktop\Zaid 
+Agency\web\node_modules\next\dist\compiled\neo-async\async.js:1:14444)
+
+Generated code for C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\node_modules\next\dist\build\webpack\loaders\css-loa
+der\src\index.js??ruleSet[1].rules[14].oneOf[12].use[2]!C:\Users\iamai\OneDrive\Desktop\Zaid Agency\web\node_modules\ne
+xt\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[3]!C:\Users\iamai\OneDriv
+e\Desktop\Zaid Agency\web\src\app\globals.css
+
+Import trace for requested module:
+./src/app/globals.css
+
+
+> Build failed because of webpack errors
