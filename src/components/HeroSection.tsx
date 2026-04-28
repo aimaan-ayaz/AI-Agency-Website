@@ -15,7 +15,7 @@ export default function HeroSection() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-white/10 blur-[100px] rounded-full" />
           <Spline scene="/scene.splinecode" />
           {/* Physical Blackout Cover for the burnt-in WebGL watermark */}
-          <div className="absolute bottom-10 right-10 w-[200px] h-[80px] bg-black z-50 pointer-events-none" />
+          <div className="absolute bottom-0 right-0 w-[200px] h-[80px] bg-black z-50 pointer-events-none" />
         </motion.div>
       </div>
 
