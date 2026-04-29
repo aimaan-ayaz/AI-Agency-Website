@@ -6,16 +6,16 @@ export default function ContactFooter() {
   const [state, handleSubmit] = useForm('mojygdqk');
 
   return (
-    <section id="contact" className="relative bg-black border-t border-white/10 pt-32 pb-8">
-      <div className="container mx-auto px-6 max-w-4xl">
+    <section id="contact" className="relative bg-black border-t border-white/10 pt-16 md:pt-32 pb-8">
+      <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
         
         {/* Contact Form */}
-        <div className="mb-32">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+        <div className="mb-16 md:mb-32">
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tight">
               Let's build the future.
             </h2>
-            <p className="text-white/60 text-lg max-w-2xl mx-auto">
+            <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto">
               Ready to scale? Drop your details below and we'll get back to you within 24 hours.
             </p>
           </div>

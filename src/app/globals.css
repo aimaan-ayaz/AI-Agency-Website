@@ -103,6 +103,13 @@
   .text-gradient-subtle {
     @apply bg-clip-text text-transparent bg-gradient-to-b from-white/70 to-white/30;
   }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* Hide Spline Watermark Logo */

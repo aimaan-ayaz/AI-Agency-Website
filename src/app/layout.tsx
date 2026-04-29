@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { SmoothScroll } from "@/components/SmoothScroll";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -16,9 +19,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("dark font-sans scroll-smooth", inter.variable)}>
+    <html lang="en" className={cn("dark font-sans", inter.variable)}>
+      <head>
+        <link rel="preload" href="/scene.splinecode" as="fetch" crossOrigin="anonymous" />
+      </head>
       <body className="antialiased min-h-screen bg-background text-foreground overflow-x-hidden">
-        {children}
+        <SmoothScroll>
+          <NoiseOverlay />
+          <CustomCursor />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
