@@ -46,9 +46,8 @@ export function Typewriter({ text, className, speed = 40, delay = 500 }: Typewri
         </span>
       ))}
       <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ repeat: Infinity, duration: 0.8, ease: "step-end" }}
+        animate={{ opacity: [1, 0, 1] }}
+        transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
         className="inline-block w-[4px] h-[0.9em] bg-white ml-1 align-baseline translate-y-[2px]"
       />
     </span>
