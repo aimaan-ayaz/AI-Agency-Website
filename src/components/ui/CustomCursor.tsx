@@ -61,16 +61,6 @@ export function CustomCursor() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: `
-        @media (pointer: fine) {
-          body {
-            cursor: none;
-          }
-          a, button, [role="button"], input, select, textarea {
-            cursor: none;
-          }
-        }
-      `}} />
       <motion.div
         className="pointer-events-none fixed left-0 top-0 z-[9999] hidden h-8 w-8 items-center justify-center rounded-full border border-white/50 mix-blend-difference md:flex"
         style={{
