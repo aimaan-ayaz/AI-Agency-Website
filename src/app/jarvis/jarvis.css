@@ -1,0 +1,212 @@
+/* ============================================================
+   JARVIS — design system.
+   An extension of the Zaid Agency visual language: true
+   near-black, monochrome, hairline precision, restrained slow
+   motion. "Futuristic" comes from discipline, not neon.
+   Scoped under `.jarvis-root` — never leaks into the site.
+   ============================================================ */
+
+.jarvis-root {
+  /* Surface */
+  --j-bg: #0a0a0b;            /* matches the marketing site */
+  --j-bg-2: #070708;
+  --j-elev: rgba(255, 255, 255, 0.022);
+  --j-elev-2: rgba(255, 255, 255, 0.04);
+
+  /* Hairlines */
+  --j-line: rgba(255, 255, 255, 0.08);
+  --j-line-soft: rgba(255, 255, 255, 0.05);
+  --j-line-strong: rgba(255, 255, 255, 0.16);
+
+  /* Text */
+  --j-t-1: rgba(255, 255, 255, 0.92);
+  --j-t-2: rgba(255, 255, 255, 0.55);
+  --j-t-3: rgba(255, 255, 255, 0.34);
+  --j-t-4: rgba(255, 255, 255, 0.2);
+
+  /* The single, whisper-quiet accent — a cold off-white. Used only
+     to signal "live", never as decoration. */
+  --j-signal: 210 90% 86%;          /* hsl parts → rgba via color-mix-free */
+  --j-signal-c: #cfe4f5;
+  --j-danger: #d96b6b;              /* muted, not neon */
+
+  --j-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% 0%, var(--j-bg) 0%, var(--j-bg-2) 100%);
+  color: var(--j-t-1);
+  overflow: hidden;
+  isolation: isolate;
+  -webkit-font-smoothing: antialiased;
+}
+
+.jarvis-root *::selection {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+/* ---- Typography ---------------------------------------------------- */
+/* Reuses the site's globally-loaded faces:
+   .font-walsheim (headings) · .font-inter (UI/body) · .font-blanka (mark) */
+
+.j-mono {
+  font-family: var(--j-mono);
+  font-feature-settings: "tnum";
+}
+
+/* Micro label — the agency's signature mono/tracked caps */
+.j-label {
+  font-family: var(--j-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 10px;
+  line-height: 1;
+  color: var(--j-t-3);
+}
+
+/* The JARVIS mark — Blanka, drawn as a hairline outline like the
+   site's hero "ZA". Quiet, architectural, unmistakably on-brand. */
+.j-mark {
+  font-family: "Blanka", "GT Walsheim", sans-serif;
+  color: transparent;
+  -webkit-text-stroke: 1.25px rgba(255, 255, 255, 0.62);
+  letter-spacing: 0.16em;
+  user-select: none;
+}
+.j-mark-fill {
+  font-family: "Blanka", "GT Walsheim", sans-serif;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.16em;
+  user-select: none;
+}
+
+/* ---- Panel --------------------------------------------------------- */
+.j-panel {
+  position: relative;
+  background: var(--j-elev);
+  backdrop-filter: blur(14px) saturate(118%);
+  -webkit-backdrop-filter: blur(14px) saturate(118%);
+  border: 1px solid var(--j-line);
+  border-radius: 18px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 40px 90px -50px rgba(0, 0, 0, 0.95);
+  transition: border-color 0.5s ease, background 0.5s ease;
+}
+.j-panel:hover {
+  border-color: var(--j-line-strong);
+  background: var(--j-elev-2);
+}
+
+/* ---- Motion primitives -------------------------------------------- */
+.j-ease { transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+
+@keyframes j-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes j-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes j-grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* Panel power-on: a quiet rise + a thin top hairline that draws in.
+   No bright scan bar — restraint reads as premium. */
+.j-power-on { animation: j-rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.j-power-on::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: scaleX(0);
+  transform-origin: center;
+  animation: j-grow-x 1s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* A single, slow ambient hairline drifting down the scene — the only
+   looping motion in the background. Barely perceptible by design. */
+@keyframes j-drift {
+  0%   { transform: translateY(-5vh); opacity: 0; }
+  10%  { opacity: 0.45; }
+  90%  { opacity: 0.45; }
+  100% { transform: translateY(105vh); opacity: 0; }
+}
+.j-drift {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.14),
+    transparent
+  );
+  animation: j-drift 13s linear infinite;
+  pointer-events: none;
+}
+
+/* Soft vignette — focus, no hard edges */
+.j-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    130% 100% at 50% 45%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* Thin caret — a 1px line, not a block */
+@keyframes j-caret { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
+.j-caret {
+  display: inline-block;
+  width: 1px;
+  height: 1.1em;
+  vertical-align: -0.18em;
+  background: rgba(255, 255, 255, 0.7);
+  margin-left: 3px;
+  animation: j-caret 1.1s steps(1) infinite;
+}
+
+/* Restrained "denied" — a small nudge, not a violent shake */
+@keyframes j-nudge {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+.j-nudge { animation: j-nudge 0.34s cubic-bezier(0.36, 0.07, 0.19, 0.97) 1; }
+
+/* The access mark's slow orbiting highlight (one soft arc, ~ once / 9s) */
+@keyframes j-orbit { to { transform: rotate(360deg); } }
+.j-orbit { animation: j-orbit 9s linear infinite; }
+
+@keyframes j-breathe {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 0.9; }
+}
+.j-breathe { animation: j-breathe 4.5s ease-in-out infinite; }
+
+/* Slim scrollbars */
+.jarvis-root .j-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
+.jarvis-root .j-scroll::-webkit-scrollbar-track { background: transparent; }
+.jarvis-root .j-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 99px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jarvis-root .j-drift,
+  .jarvis-root .j-orbit,
+  .jarvis-root .j-breathe,
+  .jarvis-root .j-caret { animation: none !important; }
+}
