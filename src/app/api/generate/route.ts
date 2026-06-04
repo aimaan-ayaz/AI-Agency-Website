@@ -4,13 +4,13 @@ import sharp from "sharp";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60; // FLUX + cutout can exceed the 10s serverless default
 
 // Image route. Generates the graphic with Cloudflare Workers AI
 // FLUX.1 [schnell] (free, commercial-clean), then strips the flat light-grey
-// background to a transparent PNG with @imgly so the decal renderer gets the
-// same `{ image: <png data url> }` shape it always has. FLUX has no transparent
-// output of its own — the design-director asks for a flat grey backdrop and we
-// cut it out here.
+// background to a transparent PNG. Primary cutout is the ML model (@imgly);
+// if it can't run (e.g. serverless without its ONNX runtime) we fall back to a
+// sharp grey-key so the route still returns a usable transparent PNG.
 const FLUX_MODEL = "@cf/black-forest-labs/flux-1-schnell";
 const STEPS = 6; // FLUX schnell caps at 8
 const MAX_PROMPT_CHARS = 1500; // FLUX prompt limit is 2048
@@ -51,6 +51,49 @@ function json(body: unknown, status = 200) {
   });
 }
 
+function short(e: unknown): string {
+  return String((e as Error)?.message || e || "").slice(0, 180);
+}
+
+// Serverless-safe background removal. FLUX renders the graphic on a flat solid
+// light-grey field, so we key out pixels close to the sampled corner colour.
+// Rougher than the ML cutout but needs no ONNX model / native runtime.
+async function greyKeyCutout(jpegBuf: Buffer): Promise<Buffer> {
+  const { data, info } = await sharp(jpegBuf)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  const { width, height } = info;
+  const ch = info.channels; // 4 after ensureAlpha
+  // Background colour = average of the four corner pixels.
+  const corners = [
+    0,
+    (width - 1) * ch,
+    (height - 1) * width * ch,
+    ((height - 1) * width + (width - 1)) * ch,
+  ];
+  let br = 0,
+    bg = 0,
+    bb = 0;
+  for (const i of corners) {
+    br += data[i];
+    bg += data[i + 1];
+    bb += data[i + 2];
+  }
+  br /= corners.length;
+  bg /= corners.length;
+  bb /= corners.length;
+  const T = 44; // colour-distance threshold (0–441)
+  const T2 = T * T;
+  for (let p = 0; p < data.length; p += ch) {
+    const dr = data[p] - br;
+    const dg = data[p + 1] - bg;
+    const db = data[p + 2] - bb;
+    if (dr * dr + dg * dg + db * db <= T2) data[p + 3] = 0;
+  }
+  return sharp(data, { raw: { width, height, channels: ch } }).png().toBuffer();
+}
+
 export async function POST(req: NextRequest) {
   const accountId = process.env.CF_ACCOUNT_ID;
   const token = process.env.CF_AI_API_TOKEN;
@@ -60,7 +103,7 @@ export async function POST(req: NextRequest) {
       {
         error: "unconfigured",
         message:
-          "Cloudflare Workers AI isn't configured. Add CF_ACCOUNT_ID and CF_AI_API_TOKEN to web/.env.local.",
+          "Image generation isn't configured on the server (CF_ACCOUNT_ID / CF_AI_API_TOKEN).",
       },
       500
     );
@@ -75,7 +118,7 @@ export async function POST(req: NextRequest) {
   if (!imagePrompt) return json({ error: "invalid_request" }, 400);
 
   // Reinforce the flat-grey, cleanly-cut-out intent (FLUX can't do transparency;
-  // a clean solid backdrop is what lets @imgly isolate the graphic).
+  // a clean solid backdrop is what lets us isolate the graphic).
   const prompt =
     `${imagePrompt.slice(0, MAX_PROMPT_CHARS)}. ` +
     `A single centered graphic isolated on a plain flat solid light grey ` +
@@ -101,7 +144,10 @@ export async function POST(req: NextRequest) {
       const errText = await r.text().catch(() => "");
       if (r.status === 429) return json({ error: "rate_limit" }, 429);
       console.error("[fashion/generate] Cloudflare error", r.status, errText.slice(0, 300));
-      return json({ error: "image_failed" }, 502);
+      return json(
+        { error: "image_failed", stage: "cloudflare", status: r.status, detail: errText.slice(0, 180) },
+        502
+      );
     }
 
     // CF REST envelope: { success, errors, messages, result: { image: <b64 jpeg> } }
@@ -109,54 +155,54 @@ export async function POST(req: NextRequest) {
     b64 = data?.result?.image;
     if (!b64 || typeof b64 !== "string") {
       console.error("[fashion/generate] no result.image in Cloudflare response");
-      return json({ error: "image_failed" }, 502);
+      return json({ error: "image_failed", stage: "cloudflare_noimage" }, 502);
     }
   } catch (err) {
     console.error("[fashion/generate] Cloudflare request failed", err);
-    return json({ error: "image_failed" }, 502);
+    return json({ error: "image_failed", stage: "cloudflare_fetch", detail: short(err) }, 502);
   }
 
-  // 2) Cut the flat-grey background out -> transparent PNG (@imgly).
-  // The node build needs a typed Blob (it rejects data: URLs and untyped
-  // buffers), so wrap the base64 JPEG bytes in a Blob with an explicit MIME.
+  // 2) Cut the flat-grey background to transparent. Prefer the ML cutout; fall
+  // back to the sharp grey-key if it can't run (keeps the route working
+  // serverless even when @imgly's native/ONNX runtime is unavailable).
+  let cutoutBuf: Buffer;
+  let method = "imgly";
   try {
     const inBlob = new Blob([Buffer.from(b64, "base64")], { type: "image/jpeg" });
-    const outBlob = await removeBackground(inBlob, {
-      output: { format: "image/png" },
-    });
-    const outBuf = Buffer.from(await outBlob.arrayBuffer());
-
-    // 3) Trim the transparent margin and re-centre on a square so the art FILLS
-    // its placement zone (FLUX centres the subject with wide grey margins → the
-    // cutout otherwise floats small inside the print box). Contain-to-square
-    // keeps the aspect ratio (no distortion); the 32px pad leaves a clean edge.
-    let finalBuf: Buffer = outBuf;
+    const outBlob = await removeBackground(inBlob, { output: { format: "image/png" } });
+    cutoutBuf = Buffer.from(await outBlob.arrayBuffer());
+  } catch (imglyErr) {
+    console.error("[fashion/generate] @imgly cutout failed; trying sharp grey-key", imglyErr);
     try {
-      const trimmed = await sharp(outBuf).trim().toBuffer();
-      finalBuf = await sharp(trimmed)
-        .resize(960, 960, {
-          fit: "contain",
-          background: { r: 0, g: 0, b: 0, alpha: 0 },
-        })
-        .extend({
-          top: 32,
-          bottom: 32,
-          left: 32,
-          right: 32,
-          background: { r: 0, g: 0, b: 0, alpha: 0 },
-        })
-        .png()
-        .toBuffer();
-    } catch (e) {
-      console.error("[fashion/generate] trim/normalise failed; using raw cutout", e);
-      finalBuf = outBuf;
+      cutoutBuf = await greyKeyCutout(Buffer.from(b64, "base64"));
+      method = "greykey";
+    } catch (keyErr) {
+      console.error("[fashion/generate] grey-key fallback failed", keyErr);
+      return json({ error: "image_failed", stage: "cutout", detail: short(imglyErr) }, 502);
     }
-
-    return json({ image: `data:image/png;base64,${finalBuf.toString("base64")}` });
-  } catch (err) {
-    // Graceful fallback (approved): never return the grey-box image; surface a
-    // friendly error so the studio shows "try again" instead of crashing.
-    console.error("[fashion/generate] background removal failed", err);
-    return json({ error: "image_failed" }, 502);
   }
+
+  // 3) Trim the transparent margin and re-centre on a square so the art FILLS
+  // its placement zone (FLUX centres the subject with wide margins). Contain-to-
+  // square keeps the aspect ratio (no distortion); the 32px pad leaves an edge.
+  let finalBuf: Buffer = cutoutBuf;
+  try {
+    const trimmed = await sharp(cutoutBuf).trim().toBuffer();
+    finalBuf = await sharp(trimmed)
+      .resize(960, 960, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+      .extend({
+        top: 32,
+        bottom: 32,
+        left: 32,
+        right: 32,
+        background: { r: 0, g: 0, b: 0, alpha: 0 },
+      })
+      .png()
+      .toBuffer();
+  } catch (e) {
+    console.error("[fashion/generate] trim/normalise failed; using raw cutout", e);
+    finalBuf = cutoutBuf;
+  }
+
+  return json({ image: `data:image/png;base64,${finalBuf.toString("base64")}`, method });
 }

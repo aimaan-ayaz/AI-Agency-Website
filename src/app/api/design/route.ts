@@ -3,6 +3,7 @@ import { DESIGN_SYSTEM_PROMPT } from "@/lib/fashion/design-prompt";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 30; // model fallback chain can exceed the 10s default
 
 // Design-director brain: Google Gemini 2.5 Flash (free Google AI Studio), JSON
 // mode. Native generateContent, mirroring the existing /api/z-chat integration.

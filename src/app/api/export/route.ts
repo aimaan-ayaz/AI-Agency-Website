@@ -4,6 +4,7 @@ import JSZip from "jszip";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60; // sharp upscales several large PNGs
 
 // Phase 4 — print export. Each on-tee graphic (already a cut-out transparent
 // PNG) is upscaled to ~300 DPI at the real print size for its placement and
