@@ -17,6 +17,14 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ['framer-motion'],
+    // @imgly background removal pulls native/wasm deps (onnxruntime-node, sharp).
+    // Mark them external so they load at runtime in the Node API route instead
+    // of being bundled by webpack (which would break the native binaries).
+    serverComponentsExternalPackages: [
+      '@imgly/background-removal-node',
+      'onnxruntime-node',
+      'sharp',
+    ],
   },
   // Disable webpack's filesystem cache in dev. The project lives on OneDrive,
   // whose sync activity intermittently locks/relocates files in `.next/cache`,

@@ -1,0 +1,20 @@
+Tee model — attribution
+========================
+
+File: tee.gltf  (+ T_shirt_gltf.zip.bin buffer)
+
+This is a free, CC-BY-licensed t-shirt model used under the Phase-1 build.
+CC-BY 4.0 requires crediting the original author. The attribution details
+below are a PLACEHOLDER — fill in the exact author + source URL from where
+the model was downloaded (e.g. the Sketchfab model page).
+
+  Title:   <model title>
+  Author:  <author name>
+  Source:  <download URL, e.g. https://sketchfab.com/3d-models/...>
+  License: CC-BY 4.0  (https://creativecommons.org/licenses/by/4.0/)
+
+This credit must be surfaced in the product UI (planned for Phase 3 polish)
+and kept with the asset.
+
+Fabric textures: Poly Haven "Fabric Pattern 07" (CC0, no attribution required)
+— public/textures/fabric/. https://polyhaven.com/a/fabric_pattern_07
