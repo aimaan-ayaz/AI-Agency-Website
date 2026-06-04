@@ -9,7 +9,7 @@ export const maxDuration = 30; // model fallback chain can exceed the 10s defaul
 // mode. Native generateContent, mirroring the existing /api/z-chat integration.
 // Free-tier models, tried in order; a quota/rate failure advances to the next.
 const MODELS = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash-lite"];
-const MAX_TOKENS = 1024;
+const MAX_TOKENS = 2048; // headroom so JSON never truncates mid-string
 const MAX_MESSAGE_CHARS = 600;
 const MAX_DESIGNS_CONTEXT = 12;
 
@@ -220,7 +220,7 @@ function safeParse(raw: string): {
 
   const action = (ACTIONS as readonly string[]).includes(o.action as string)
     ? (o.action as (typeof ACTIONS)[number])
-    : "reject";
+    : "add"; // graceful default — never silently drop to a no-op reject
   const reply =
     typeof o.reply === "string" && o.reply.trim() ? o.reply.trim() : "Done.";
   const reject_reason =

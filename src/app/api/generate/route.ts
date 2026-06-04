@@ -1,16 +1,16 @@
 import { NextRequest } from "next/server";
-import { removeBackground } from "@imgly/background-removal-node";
 import sharp from "sharp";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-export const maxDuration = 60; // FLUX + cutout can exceed the 10s serverless default
+export const maxDuration = 60; // FLUX can exceed the 10s serverless default
 
 // Image route. Generates the graphic with Cloudflare Workers AI
 // FLUX.1 [schnell] (free, commercial-clean), then strips the flat light-grey
-// background to a transparent PNG. Primary cutout is the ML model (@imgly);
-// if it can't run (e.g. serverless without its ONNX runtime) we fall back to a
-// sharp grey-key so the route still returns a usable transparent PNG.
+// background to a transparent PNG with a sharp grey-key. (We dropped the @imgly
+// ML cutout — its ONNX runtime + model don't survive a typical Node host and
+// it's heavy; FLUX renders on a controlled flat field, so the grey-key is a
+// clean, dependency-light, host-portable cutout.)
 const FLUX_MODEL = "@cf/black-forest-labs/flux-1-schnell";
 const STEPS = 6; // FLUX schnell caps at 8
 const MAX_PROMPT_CHARS = 1500; // FLUX prompt limit is 2048
@@ -162,24 +162,13 @@ export async function POST(req: NextRequest) {
     return json({ error: "image_failed", stage: "cloudflare_fetch", detail: short(err) }, 502);
   }
 
-  // 2) Cut the flat-grey background to transparent. Prefer the ML cutout; fall
-  // back to the sharp grey-key if it can't run (keeps the route working
-  // serverless even when @imgly's native/ONNX runtime is unavailable).
+  // 2) Cut the flat-grey background to transparent (sharp grey-key).
   let cutoutBuf: Buffer;
-  let method = "imgly";
   try {
-    const inBlob = new Blob([Buffer.from(b64, "base64")], { type: "image/jpeg" });
-    const outBlob = await removeBackground(inBlob, { output: { format: "image/png" } });
-    cutoutBuf = Buffer.from(await outBlob.arrayBuffer());
-  } catch (imglyErr) {
-    console.error("[fashion/generate] @imgly cutout failed; trying sharp grey-key", imglyErr);
-    try {
-      cutoutBuf = await greyKeyCutout(Buffer.from(b64, "base64"));
-      method = "greykey";
-    } catch (keyErr) {
-      console.error("[fashion/generate] grey-key fallback failed", keyErr);
-      return json({ error: "image_failed", stage: "cutout", detail: short(imglyErr) }, 502);
-    }
+    cutoutBuf = await greyKeyCutout(Buffer.from(b64, "base64"));
+  } catch (keyErr) {
+    console.error("[fashion/generate] grey-key cutout failed", keyErr);
+    return json({ error: "image_failed", stage: "cutout", detail: short(keyErr) }, 502);
   }
 
   // 3) Trim the transparent margin and re-centre on a square so the art FILLS
@@ -204,5 +193,5 @@ export async function POST(req: NextRequest) {
     finalBuf = cutoutBuf;
   }
 
-  return json({ image: `data:image/png;base64,${finalBuf.toString("base64")}`, method });
+  return json({ image: `data:image/png;base64,${finalBuf.toString("base64")}` });
 }
