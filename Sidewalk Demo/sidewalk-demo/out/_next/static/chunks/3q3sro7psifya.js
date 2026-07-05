@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,28323,o=>{o.q("/sidewalkdemo/_next/static/media/logo.2h556rjyzj_cx.png")}]);

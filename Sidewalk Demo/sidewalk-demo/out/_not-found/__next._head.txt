@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[87239,["/sidewalkdemo/_next/static/chunks/3rw52k9ot9vvy.js","/sidewalkdemo/_next/static/chunks/3l9k4x7ovu6_i.js"],"ViewportBoundary"]
+3:I[87239,["/sidewalkdemo/_next/static/chunks/3rw52k9ot9vvy.js","/sidewalkdemo/_next/static/chunks/3l9k4x7ovu6_i.js"],"MetadataBoundary"]
+4:"$Sreact.suspense"
+5:I[70914,["/sidewalkdemo/_next/static/chunks/3rw52k9ot9vvy.js","/sidewalkdemo/_next/static/chunks/3l9k4x7ovu6_i.js"],"IconMark"]
+0:{"rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#f7f1e3"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Sidewalk · Order at your table"}],["$","meta","1",{"name":"description","content":"Community inspired café — scan, order, enjoy."}],["$","link","2",{"rel":"icon","href":"/sidewalkdemo/icon.svg?icon.3akvy5pevq17y.svg","sizes":"any","type":"image/svg+xml"}],["$","$L5","3",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Tfm6412ALiF_KRW7XZD42"}

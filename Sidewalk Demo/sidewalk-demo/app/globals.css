@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/*
+ * ════════════════════════════════════════════════════════════
+ *  SIDEWALK — BRAND COLORS & FONTS (the one place to edit)
+ *  Names, logo path, table default etc. live in data/brand.ts
+ * ════════════════════════════════════════════════════════════
+ */
+@theme {
+  --color-cream: #f7f1e3; /* page background — menu paper */
+  --color-paper: #fdf9ef; /* cards / sheets */
+  --color-ink: #1c1a16; /* primary text — near-black ink */
+  --color-ink-soft: #6b6357; /* secondary text */
+  --color-line: #e6dcc6; /* hairline borders */
+  --color-accent: #17734a; /* success / pay green */
+  /* Pastel diet dots — matched to the printed menu legend */
+  --color-veg: #94c29c;
+  --color-nonveg: #ef9a8d;
+  --color-egg: #f2c96d;
+  --color-spice: #d1442e;
+
+  --font-display: var(--font-oswald), sans-serif; /* condensed headings, like the logotype */
+  --font-body: var(--font-dm-sans), sans-serif; /* body copy */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide scrollbars on the horizontal category rail */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
