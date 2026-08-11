@@ -209,7 +209,7 @@ export default function AccessGate({
       </AnimatePresence>
 
       <div className={`flex flex-col items-center ${nudge ? "j-nudge" : ""}`}>
-        <span className="j-label mb-12">Zaid Agency · Private Access</span>
+        <span className="j-label mb-12">Z Agency · Private Access</span>
 
         <Mark state={state.kind} />
 

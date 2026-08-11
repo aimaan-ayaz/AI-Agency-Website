@@ -8,20 +8,30 @@ const services = [
   {
     id: "websites",
     title: "Website Building",
+    kicker: "Build",
     description:
       "Pixel perfect landing pages, brand defining portfolios, and conversion ready storefronts. Engineered for speed, tuned for trust, built to print revenue.",
   },
   {
     id: "saas",
     title: "SaaS Development",
+    kicker: "Launch",
     description:
       "Production grade platforms with auth, billing, dashboards, and infrastructure baked in. Real software, real users, real MRR by week one.",
   },
   {
     id: "ai-automation",
     title: "AI Automation",
+    kicker: "Automate",
     description:
-      "Autonomous agents that ship content, qualify leads, and run support around the clock. Trade manual grind for compounding leverage.",
+      "Instagram and Facebook message automation for business accounts. We reply to customer enquiries on your behalf, in your voice, around the clock — and capture every lead so nothing goes cold. Plus custom AI agents and internal workflow automation.",
+  },
+  {
+    id: "ads",
+    title: "Ads Management",
+    kicker: "Advertise",
+    description:
+      "Meta ads built, launched and monitored on your own ad account. Targeting, creative and daily optimisation handled end to end, reported back in plain numbers — spend in, results out.",
   },
 ];
 
@@ -30,7 +40,7 @@ function MobileServiceHeading({
   service,
 }: {
   index: number;
-  service: { title: string; description: string };
+  service: { title: string; kicker: string; description: string };
 }) {
   const num = String(index + 1).padStart(2, "0");
   return (
@@ -45,7 +55,7 @@ function MobileServiceHeading({
         <span className="text-[10px] text-white/40 font-mono tracking-[0.3em]">{num}</span>
         <div className="w-6 h-px bg-white/20" />
         <span className="text-[10px] text-white/45 font-mono tracking-[0.3em] uppercase">
-          {index === 0 ? "Build" : index === 1 ? "Launch" : "Automate"}
+          {service.kicker}
         </span>
       </div>
       <h3 className="font-walsheim text-2xl sm:text-3xl font-bold text-white tracking-tight leading-[1.15] mb-3">
@@ -103,7 +113,7 @@ function WebsiteVisual() {
         viewport={{ once: true, margin: "-15% 0px" }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
-        <ScreenFrame title="project-02.zaid.studio" aspectClass="aspect-[16/9]">
+        <ScreenFrame title="project-02.z.studio" aspectClass="aspect-[16/9]">
           <video
             src="/showcase/website-2.mp4"
             autoPlay
@@ -122,7 +132,7 @@ function WebsiteVisual() {
         viewport={{ once: true, margin: "-15% 0px" }}
         transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
       >
-        <ScreenFrame title="project-01.zaid.studio" aspectClass="aspect-[16/9]">
+        <ScreenFrame title="project-01.z.studio" aspectClass="aspect-[16/9]">
           <video
             src="/showcase/website-1.mp4"
             autoPlay
@@ -282,7 +292,7 @@ function SaaSDashboard() {
               <span className="text-white/20">/</span>
               <span className="text-white/60">Dashboard</span>
             </div>
-            <p className="text-white text-sm font-semibold">Welcome back, Zaid</p>
+            <p className="text-white text-sm font-semibold">Welcome back, Z</p>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="bg-white/[0.04] border border-white/[0.08] rounded-md px-2 py-1 text-[10px] text-white/45 flex items-center gap-1.5">
@@ -562,7 +572,7 @@ function SaaSVisual() {
         viewport={{ once: true, margin: "-15% 0px" }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
-        <ScreenFrame title="app.zaid.studio/customers">
+        <ScreenFrame title="app.z.studio/customers">
           <SaaSCustomers />
         </ScreenFrame>
       </motion.div>
@@ -573,7 +583,7 @@ function SaaSVisual() {
         viewport={{ once: true, margin: "-15% 0px" }}
         transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
       >
-        <ScreenFrame title="app.zaid.studio">
+        <ScreenFrame title="app.z.studio">
           <SaaSDashboard />
         </ScreenFrame>
       </motion.div>
@@ -597,7 +607,7 @@ const LIVE_LOG_POOL = [
 ];
 
 const INITIAL_TERMINAL_LINES = [
-  { text: "$ zaid-agent run --workspace prod", color: "text-white/80" },
+  { text: "$ z-agent run --workspace prod", color: "text-white/80" },
   { text: "→ Loading agents from config...", color: "text-white/40" },
   { text: "✓ Resolved 5 agents · 12 tools", color: "text-emerald-400" },
   { text: "→ Connecting to vector store...", color: "text-white/40" },
@@ -920,7 +930,7 @@ function AIWorkflow() {
           <div className="w-7 h-7 rounded-md bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white text-[10px] font-bold">F</div>
           <div>
             <p className="text-white text-xs font-semibold leading-tight">Workflow · Inbound Triage</p>
-            <p className="text-white/35 text-[9px] font-mono mt-0.5">v4.2 · last edit 6h ago · by Zaid</p>
+            <p className="text-white/35 text-[9px] font-mono mt-0.5">v4.2 · last edit 6h ago · by Z</p>
           </div>
         </div>
         <div className="flex items-center gap-2 text-[10px] font-mono">
@@ -1082,7 +1092,7 @@ function AIVisual() {
         viewport={{ once: true, margin: "-15% 0px" }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
-        <ScreenFrame title="agents.zaid.ai/flows">
+        <ScreenFrame title="agents.z.ai/flows">
           <AIWorkflow />
         </ScreenFrame>
       </motion.div>
@@ -1093,8 +1103,413 @@ function AIVisual() {
         viewport={{ once: true, margin: "-15% 0px" }}
         transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
       >
-        <ScreenFrame title="agents.zaid.ai">
+        <ScreenFrame title="agents.z.ai">
           <AITerminal />
+        </ScreenFrame>
+      </motion.div>
+    </div>
+  );
+}
+
+const AD_CAMPAIGN_POOL = [
+  { name: "Retargeting · Warm 30d", objective: "Conversions", spend: "$4,280", results: "412", status: "active" },
+  { name: "Lookalike 1% · IG Reels", objective: "Leads", spend: "$2,960", results: "268", status: "active" },
+  { name: "Broad Prospecting · Feed", objective: "Traffic", spend: "$1,740", results: "1,204", status: "active" },
+  { name: "Cart Abandon · Dynamic", objective: "Sales", spend: "$3,510", results: "336", status: "active" },
+  { name: "Story Ads · Creative B", objective: "Awareness", spend: "$980", results: "84.2k", status: "learning" },
+  { name: "Message Ads · Inbox", objective: "Messages", spend: "$1,220", results: "196", status: "active" },
+  { name: "Video Views · Hook 03", objective: "Video", spend: "$640", results: "42.8k", status: "paused" },
+  { name: "Catalog Sales · Top 20", objective: "Sales", spend: "$5,120", results: "489", status: "active" },
+  { name: "Lead Form · Local Reach", objective: "Leads", spend: "$1,480", results: "154", status: "active" },
+  { name: "Reels Boost · UGC 02", objective: "Engagement", spend: "$820", results: "12.4k", status: "learning" },
+];
+
+function AdsCampaigns() {
+  const [rootRef, inView] = useInViewRef<HTMLDivElement>();
+  const [startIdx, setStartIdx] = useState(0);
+  const [stamp, setStamp] = useState(0);
+  const [spend, setSpend] = useState(18420);
+  const [spark1, setSpark1] = useState([4, 5, 5, 6, 7, 6, 8, 9, 9, 10]);
+  const [spark2, setSpark2] = useState([3, 4, 6, 5, 7, 8, 8, 9, 10, 10]);
+  const [spark3, setSpark3] = useState([5, 6, 6, 7, 7, 8, 9, 9, 10, 10]);
+
+  useInterval(() => {
+    setStartIdx((i) => (i + 1) % AD_CAMPAIGN_POOL.length);
+    setStamp((s) => s + 1);
+  }, 2000, inView);
+
+  useInterval(() => {
+    setSpend((s) => s + 12 + Math.floor(Math.random() * 40));
+  }, 1200, inView);
+
+  useInterval(() => {
+    setSpark1((p) => [...p.slice(1), 4 + Math.floor(Math.random() * 7)]);
+    setSpark2((p) => [...p.slice(1), 4 + Math.floor(Math.random() * 7)]);
+    setSpark3((p) => [...p.slice(1), 6 + Math.floor(Math.random() * 5)]);
+  }, 1700, inView);
+
+  const visible = Array.from({ length: 6 }, (_, i) => {
+    const c = AD_CAMPAIGN_POOL[(startIdx + i) % AD_CAMPAIGN_POOL.length];
+    return { ...c, key: `${c.name}-${stamp + i}` };
+  });
+
+  const statusColor: Record<string, string> = {
+    active: "bg-emerald-400",
+    learning: "bg-amber-400",
+    paused: "bg-white/20",
+  };
+
+  const objectiveColor: Record<string, string> = {
+    Conversions: "bg-emerald-500/10 text-emerald-300 border-emerald-400/20",
+    Sales: "bg-emerald-500/10 text-emerald-300 border-emerald-400/20",
+    Leads: "bg-cyan-500/10 text-cyan-300 border-cyan-400/20",
+    Messages: "bg-cyan-500/10 text-cyan-300 border-cyan-400/20",
+    Traffic: "bg-violet-500/10 text-violet-300 border-violet-400/20",
+    Video: "bg-violet-500/10 text-violet-300 border-violet-400/20",
+    Awareness: "bg-white/[0.06] text-white/60 border-white/[0.08]",
+    Engagement: "bg-white/[0.06] text-white/60 border-white/[0.08]",
+  };
+
+  const stats = [
+    { label: "Spend", value: `$${(spend / 1000).toFixed(1)}k`, delta: "30d", spark: spark1, color: "rgba(56,189,248,0.95)" },
+    { label: "Results", value: "3,284", delta: "+21%", spark: spark2, color: "rgba(52,211,153,0.95)" },
+    { label: "ROAS", value: "5.8x", delta: "+0.6", spark: spark3, color: "rgba(167,139,250,0.95)" },
+  ];
+
+  return (
+    <div ref={rootRef} className="w-full h-full flex bg-gradient-to-br from-zinc-950 via-black to-zinc-950">
+      <div className="w-12 border-r border-white/[0.05] bg-black/30 flex flex-col items-center py-3 gap-1.5">
+        <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-[10px] font-bold text-black mb-2">Z</div>
+        {SIDEBAR_ICONS.map((d, i) => (
+          <div key={i} className={`w-8 h-8 rounded-md flex items-center justify-center ${i === 1 ? "bg-white/[0.08] text-white" : "text-white/25"}`}>
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d={d} />
+            </svg>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex-1 flex flex-col p-4 gap-3 min-w-0">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className="text-white text-sm font-semibold">Campaigns</p>
+            <p className="text-white/35 text-[10px] mt-0.5 flex items-center gap-1.5">
+              Meta · client ad account · 8 active
+              <motion.span
+                animate={{ opacity: [1, 0.3, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="w-1 h-1 rounded-full bg-emerald-400 ml-0.5"
+              />
+            </p>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <div className="bg-white/[0.04] border border-white/[0.08] rounded-md px-2 py-1 flex items-center gap-1.5 text-white/45 text-[10px]">
+              <svg className="w-2.5 h-2.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <rect x="2" y="3" width="10" height="9" rx="1" />
+                <path d="M2 6h10" />
+              </svg>
+              Last 30d
+            </div>
+            <div className="bg-emerald-500/15 border border-emerald-400/20 text-emerald-300 rounded-md px-2 py-1 text-[10px] font-medium">+ Campaign</div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-2">
+          {stats.map((s) => (
+            <div key={s.label} className="bg-white/[0.02] border border-white/[0.06] rounded-md p-2 flex items-center justify-between gap-2">
+              <div className="min-w-0">
+                <p className="text-white/35 text-[8px] uppercase tracking-[0.2em]">{s.label}</p>
+                <p className="text-white text-xs font-bold tracking-tight mt-0.5 tabular-nums">{s.value}</p>
+              </div>
+              <div className="w-12 h-5 shrink-0">
+                <MiniSparkline points={s.spark} color={s.color} />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-1.5">
+          {["All", "Active", "Learning", "Paused"].map((chip, i) => (
+            <div
+              key={chip}
+              className={`text-[10px] px-2 py-0.5 rounded-full border ${i === 0 ? "bg-white/10 text-white border-white/15" : "bg-transparent text-white/45 border-white/[0.08]"}`}
+            >
+              {chip}
+            </div>
+          ))}
+          <span className="text-white/25 text-[10px] ml-auto font-mono">6 of 24</span>
+        </div>
+
+        <div className="flex-1 bg-white/[0.02] border border-white/[0.06] rounded-lg overflow-hidden min-h-0 flex flex-col">
+          <div className="grid grid-cols-[1fr_auto_auto_auto] gap-3 px-3 py-1.5 border-b border-white/[0.06] text-[9px] text-white/30 uppercase tracking-[0.2em]">
+            <span>Campaign</span>
+            <span>Objective</span>
+            <span className="text-right w-14">Spend</span>
+            <span className="text-right w-12">Results</span>
+          </div>
+          <div className="flex-1 flex flex-col">
+            <AnimatePresence mode="popLayout" initial={false}>
+              {visible.map((c) => (
+                <motion.div
+                  key={c.key}
+                  layout
+                  initial={{ opacity: 0, y: -10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="grid grid-cols-[1fr_auto_auto_auto] items-center gap-3 px-3 py-1.5 border-b border-white/[0.03] last:border-b-0 flex-1"
+                >
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusColor[c.status]}`} />
+                    <div className="min-w-0">
+                      <p className="text-white text-[11px] font-medium truncate leading-tight">{c.name}</p>
+                      <p className="text-white/35 text-[9px] truncate font-mono">{c.status}</p>
+                    </div>
+                  </div>
+                  <span className={`text-[9px] px-1.5 py-0.5 rounded-full border font-medium ${objectiveColor[c.objective]}`}>
+                    {c.objective}
+                  </span>
+                  <span className="text-white/70 text-[11px] font-mono tabular-nums text-right w-14">{c.spend}</span>
+                  <span className="text-white/70 text-[11px] font-mono tabular-nums text-right w-12">{c.results}</span>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const AD_EVENT_POOL = [
+  { text: "✓ Budget shifted → Retargeting · Warm 30d", color: "text-emerald-400" },
+  { text: "→ Creative B entering learning phase", color: "text-white/40" },
+  { text: "✓ Cost per result down 12% · Lookalike 1%", color: "text-emerald-400" },
+  { text: "→ Testing 3 new hooks · Reels placement", color: "text-white/40" },
+  { text: "✓ Purchase logged · $184 order value", color: "text-emerald-400" },
+  { text: "→ Frequency 2.4 · rotating creative", color: "text-violet-400" },
+  { text: "✓ Lead form submitted · qualified", color: "text-emerald-400" },
+  { text: "→ Audience refresh · excluding 30d buyers", color: "text-white/40" },
+  { text: "✓ Paused underperformer · Video Hook 03", color: "text-emerald-400" },
+  { text: "→ Reallocating spend · top 3 ad sets", color: "text-violet-400" },
+];
+
+const PLACEMENTS = [
+  { label: "IG Reels", pct: 38 },
+  { label: "FB Feed", pct: 26 },
+  { label: "IG Stories", pct: 18 },
+  { label: "Explore", pct: 11 },
+  { label: "Audience Net", pct: 7 },
+];
+
+const AUDIENCES = [
+  { label: "Warm 30d", tone: "bg-emerald-500/10 text-emerald-300 border-emerald-400/20" },
+  { label: "Lookalike 1%", tone: "bg-cyan-500/10 text-cyan-300 border-cyan-400/20" },
+  { label: "Broad", tone: "bg-white/[0.06] text-white/60 border-white/[0.08]" },
+  { label: "Cart 7d", tone: "bg-violet-500/10 text-violet-300 border-violet-400/20" },
+];
+
+function AdsPerformance() {
+  const [rootRef, inView] = useInViewRef<HTMLDivElement>();
+  const [bars, setBars] = useState([38, 52, 44, 61, 50, 72, 64, 86, 70, 91, 78, 96]);
+  const [results, setResults] = useState(3284);
+  const [cpr, setCpr] = useState(9.4);
+  const [events, setEvents] = useState(() =>
+    AD_EVENT_POOL.slice(0, 9).map((e, i) => ({ ...e, key: i }))
+  );
+  const [eventKey, setEventKey] = useState(AD_EVENT_POOL.length);
+
+  useInterval(() => {
+    setBars((prev) => [...prev.slice(1), 40 + Math.floor(Math.random() * 60)]);
+  }, 1000, inView);
+
+  useInterval(() => {
+    setResults((r) => r + 1 + Math.floor(Math.random() * 3));
+    setCpr((c) => +Math.max(7.4, Math.min(11.6, c + (Math.random() * 0.4 - 0.2))).toFixed(2));
+  }, 1300, inView);
+
+  useInterval(() => {
+    setEvents((prev) => {
+      let i = Math.floor(Math.random() * AD_EVENT_POOL.length);
+      if (AD_EVENT_POOL[i].text === prev[0]?.text) {
+        i = (i + 1) % AD_EVENT_POOL.length;
+      }
+      return [{ ...AD_EVENT_POOL[i], key: eventKey }, ...prev.slice(0, 8)];
+    });
+    setEventKey((k) => k + 1);
+  }, 1600, inView);
+
+  return (
+    <div ref={rootRef} className="w-full h-full flex flex-col bg-gradient-to-br from-zinc-950 via-black to-zinc-950">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-white/[0.06] text-[10px] font-mono">
+        <div className="flex items-center gap-4">
+          <span className="flex items-center gap-1.5 text-emerald-400">
+            <motion.span
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ duration: 1.4, repeat: Infinity }}
+              className="w-1.5 h-1.5 rounded-full bg-emerald-400"
+            />
+            live · delivering
+          </span>
+          <span className="text-white/40">reach <span className="text-white/65 tabular-nums">284k</span></span>
+          <span className="text-white/40">results <span className="text-white/65 tabular-nums">{results.toLocaleString("en-US")}</span></span>
+          <span className="text-white/40">cost/result <span className="text-emerald-300 tabular-nums">${cpr.toFixed(2)}</span></span>
+        </div>
+        <span className="text-white/30">client ad account</span>
+      </div>
+
+      <div className="flex-1 grid grid-cols-[1.15fr_1fr] gap-3 p-3 min-h-0">
+        <div className="bg-black/40 border border-white/[0.05] rounded-lg flex flex-col p-3 overflow-hidden min-h-0">
+          <div className="flex items-center justify-between mb-2 shrink-0">
+            <p className="text-white/65 text-[11px] font-medium">Spend vs results · 12d</p>
+            <span className="text-emerald-400 text-[9px] font-mono">▲ 21%</span>
+          </div>
+
+          <div className="relative h-[38%] min-h-[56px] mb-3 shrink-0">
+            <div className="absolute inset-0 flex items-end gap-1">
+              {bars.map((h, i) => (
+                <motion.div
+                  key={i}
+                  animate={{ height: `${h}%` }}
+                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex-1 bg-gradient-to-t from-cyan-500/15 to-cyan-400/60 rounded-sm min-h-[2px]"
+                />
+              ))}
+            </div>
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 200 60" preserveAspectRatio="none">
+              <motion.path
+                d="M0,48 C20,44 40,46 60,36 C80,28 100,34 120,24 C140,16 160,22 180,10 L200,6"
+                fill="none"
+                stroke="rgba(52,211,153,0.9)"
+                strokeWidth="1.5"
+                vectorEffect="non-scaling-stroke"
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+              />
+            </svg>
+          </div>
+
+          <div className="flex flex-col flex-1 min-h-0 overflow-hidden gap-0.5">
+            <AnimatePresence initial={false} mode="popLayout">
+              {events.map((e) => (
+                <motion.div
+                  key={e.key}
+                  layout
+                  initial={{ opacity: 0, x: -6, height: 0 }}
+                  animate={{ opacity: 1, x: 0, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  className={`${e.color} text-[10px] font-mono leading-tight overflow-hidden truncate`}
+                >
+                  {e.text}
+                </motion.div>
+              ))}
+            </AnimatePresence>
+            <motion.span
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+              className="text-white/70 text-[10px] font-mono mt-auto"
+            >
+              ▊
+            </motion.span>
+          </div>
+        </div>
+
+        <div className="bg-black/40 border border-white/[0.05] rounded-lg flex flex-col p-3 overflow-hidden min-h-0 relative">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(56,189,248,0.1),transparent_60%)] pointer-events-none" />
+
+          <div className="flex items-center justify-between mb-3 relative z-10 shrink-0">
+            <p className="text-white/65 text-[11px] font-medium">Delivery</p>
+            <span className="text-[9px] text-white/40 font-mono">by placement</span>
+          </div>
+
+          <div className="flex-1 flex flex-col justify-start sm:justify-center gap-2 relative z-10 min-h-0">
+            {PLACEMENTS.map((p, i) => (
+              <div key={p.label} className="flex items-center gap-2">
+                <span className="text-white/50 text-[9px] font-mono w-20 shrink-0 truncate">{p.label}</span>
+                <div className="flex-1 h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${p.pct}%` }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.08, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                    className="h-full rounded-full bg-gradient-to-r from-cyan-400/70 to-emerald-400/80"
+                  />
+                </div>
+                <span className="text-white/35 text-[9px] font-mono tabular-nums w-7 text-right">{p.pct}%</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="hidden sm:flex flex-1 flex-col justify-center gap-2 border-t border-white/[0.05] pt-3 relative z-10 min-h-0">
+            <p className="text-white/30 text-[8px] uppercase tracking-[0.2em]">Audiences</p>
+            <div className="flex flex-wrap gap-1.5">
+              {AUDIENCES.map((a) => (
+                <span
+                  key={a.label}
+                  className={`text-[9px] px-1.5 py-0.5 rounded-full border font-medium ${a.tone}`}
+                >
+                  {a.label}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="hidden sm:grid grid-cols-2 gap-2 relative z-10 shrink-0">
+            <div className="bg-white/[0.02] border border-white/[0.06] rounded-md p-2">
+              <p className="text-white/30 text-[8px] uppercase tracking-[0.2em]">CTR</p>
+              <p className="text-white text-[11px] font-mono mt-0.5 tabular-nums">2.84%</p>
+            </div>
+            <div className="bg-white/[0.02] border border-white/[0.06] rounded-md p-2">
+              <p className="text-white/30 text-[8px] uppercase tracking-[0.2em]">Frequency</p>
+              <p className="text-white text-[11px] font-mono mt-0.5 tabular-nums">1.9</p>
+            </div>
+            <div className="hidden sm:block bg-white/[0.02] border border-white/[0.06] rounded-md p-2">
+              <p className="text-white/30 text-[8px] uppercase tracking-[0.2em]">Reach</p>
+              <p className="text-white text-[11px] font-mono mt-0.5 tabular-nums">284k</p>
+            </div>
+            <div className="hidden sm:block bg-white/[0.02] border border-white/[0.06] rounded-md p-2">
+              <p className="text-white/30 text-[8px] uppercase tracking-[0.2em]">Impr.</p>
+              <p className="text-white text-[11px] font-mono mt-0.5 tabular-nums">539k</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t border-white/[0.06] px-4 py-1.5 grid grid-cols-4 gap-3 text-[10px] font-mono">
+        <span className="text-white/35">spend <span className="text-white/80 tabular-nums">$18.4k</span></span>
+        <span className="text-white/35">results <span className="text-white/80 tabular-nums">{results.toLocaleString("en-US")}</span></span>
+        <span className="text-white/35">cost/result <span className="text-emerald-400 tabular-nums">${cpr.toFixed(2)}</span></span>
+        <span className="text-white/35">roas <span className="text-white/80">5.8x</span></span>
+      </div>
+    </div>
+  );
+}
+
+function AdsVisual() {
+  return (
+    <div className="space-y-5">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-15% 0px" }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <ScreenFrame title="ads.z.studio/campaigns">
+          <AdsCampaigns />
+        </ScreenFrame>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-15% 0px" }}
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <ScreenFrame title="ads.z.studio">
+          <AdsPerformance />
         </ScreenFrame>
       </motion.div>
     </div>
@@ -1165,9 +1580,10 @@ export default function ServicesShowcase() {
   const websitesRef = useRef<HTMLDivElement>(null);
   const saasRef = useRef<HTMLDivElement>(null);
   const aiRef = useRef<HTMLDivElement>(null);
+  const adsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const refs = [websitesRef, saasRef, aiRef];
+    const refs = [websitesRef, saasRef, aiRef, adsRef];
     const observers: IntersectionObserver[] = [];
 
     refs.forEach((ref, i) => {
@@ -1190,7 +1606,7 @@ export default function ServicesShowcase() {
   }, []);
 
   const scrollToVisual = (i: number) => {
-    const refs = [websitesRef, saasRef, aiRef];
+    const refs = [websitesRef, saasRef, aiRef, adsRef];
     refs[i].current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
@@ -1213,7 +1629,7 @@ export default function ServicesShowcase() {
             </h2>
           </div>
           <p className="font-inter text-white/55 text-sm md:text-base max-w-xs leading-[1.7] font-normal lg:pb-2">
-            Three pillars. One studio. Everything you need to launch a product, grow it, and put it on autopilot.
+            Four pillars. One studio. Everything you need to launch a product, grow it, and put it on autopilot.
           </p>
         </div>
 
@@ -1248,6 +1664,12 @@ export default function ServicesShowcase() {
               <MobileServiceHeading index={2} service={services[2]} />
               <div className="w-full">
                 <AIVisual />
+              </div>
+            </div>
+            <div ref={adsRef} className="min-h-[55vh] sm:min-h-[80vh] flex flex-col justify-center gap-6 lg:gap-0">
+              <MobileServiceHeading index={3} service={services[3]} />
+              <div className="w-full">
+                <AdsVisual />
               </div>
             </div>
           </div>

@@ -57,7 +57,7 @@ function TopBar({
       <div className="flex items-center gap-3 sm:gap-4">
         <span className="j-mark-fill text-base sm:text-xl">JARVIS</span>
         <span className="hidden sm:block w-px h-5 bg-white/10" />
-        <span className="hidden sm:block j-label">Zaid Agency</span>
+        <span className="hidden sm:block j-label">Z Agency</span>
       </div>
 
       <Clock />

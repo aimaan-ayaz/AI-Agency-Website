@@ -41,7 +41,7 @@ export default function BootSequence({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: EASE }}
         >
-          Zaid Agency
+          Z Agency
         </motion.span>
 
         {/* Wordmark: faint outline, then inked in by a smooth wipe */}

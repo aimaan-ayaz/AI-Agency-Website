@@ -111,7 +111,7 @@ export default function AboutPanel() {
         <div className="absolute inset-0 mix-blend-difference pointer-events-none">
           <div className="absolute top-24 left-6 sm:top-28 sm:left-12 flex items-center gap-3 text-white/80 text-[10px] sm:text-xs font-mono tracking-[0.25em] uppercase">
             <div className="w-6 h-px bg-white/60" />
-            <span>Zaid · Studio</span>
+            <span>Z · Studio</span>
           </div>
 
           <div className="absolute top-24 right-6 sm:top-28 sm:right-12 flex items-center gap-3 text-white/70 text-[10px] sm:text-xs font-mono tracking-[0.25em] uppercase">

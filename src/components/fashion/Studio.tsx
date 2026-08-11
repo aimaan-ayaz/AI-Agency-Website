@@ -528,7 +528,7 @@ export default function Studio() {
         {...rise(0.05)}
         className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between px-5 py-5 sm:px-12 sm:py-8"
       >
-        <Link href="/" className="pointer-events-auto" aria-label="Zaid — home">
+        <Link href="/" className="pointer-events-auto" aria-label="Z Agency — home">
           <Logo className="h-3.5 w-auto sm:h-4" />
         </Link>
         <nav className="pointer-events-auto flex items-center gap-6 font-mono text-[11px] uppercase tracking-[0.22em] text-[#17171a]/65 sm:gap-8">
@@ -916,7 +916,7 @@ function Logo({ className }: { className?: string }) {
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src="/zaid-wordmark.png"
-      alt="ZAID"
+      alt="Z Agency"
       className={className}
       style={{ filter: "brightness(0)" }}
     />

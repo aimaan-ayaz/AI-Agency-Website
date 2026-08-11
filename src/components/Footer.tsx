@@ -32,8 +32,43 @@ export default function Footer() {
           </a>
 
           <p className="text-[10px] sm:text-[11px] text-white/35 font-mono tracking-[0.2em] uppercase">
-            © 2026 Zaid AI Agency
+            © 2026 Z Agency
           </p>
+        </div>
+
+        <div className="border-t border-white/[0.06] py-4 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 font-inter">
+          <div className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-3 text-[10px] sm:text-[11px]">
+            <span className="text-white/45 font-mono tracking-[0.18em] uppercase">
+              Aimaan Ayaz
+            </span>
+            <span className="hidden sm:inline text-white/15">·</span>
+            <a
+              href="mailto:iamaimaanayaz@gmail.com"
+              className="text-white/40 hover:text-white/75 font-mono tracking-tight transition-colors"
+            >
+              iamaimaanayaz@gmail.com
+            </a>
+          </div>
+
+          <div className="flex items-center gap-3 sm:gap-4 text-[10px] sm:text-[11px] font-mono tracking-[0.18em] uppercase">
+            <a
+              href="https://hook.zaid.agency/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 hover:text-white/75 transition-colors"
+            >
+              Privacy Policy
+            </a>
+            <span className="text-white/15">·</span>
+            <a
+              href="https://hook.zaid.agency/tos"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 hover:text-white/75 transition-colors"
+            >
+              Terms of Service
+            </a>
+          </div>
         </div>
       </div>
     </footer>

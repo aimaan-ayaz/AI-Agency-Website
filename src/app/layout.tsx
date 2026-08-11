@@ -7,7 +7,7 @@ import { NoiseOverlay } from "@/components/ui/NoiseOverlay";
 import { CTAProvider } from "@/lib/cta-context";
 
 export const metadata: Metadata = {
-  title: "Zaid AI Agency",
+  title: "Z Agency",
   description: "Everything You Need to Launch, Grow, and Automate — Built for You.",
 };
 

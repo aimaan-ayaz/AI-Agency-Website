@@ -25,7 +25,7 @@ export default function Navbar() {
       <Link
         href="/"
         className="flex items-center hover:opacity-80 transition-opacity shrink-0 ml-2 sm:ml-4 mt-2 sm:mt-3"
-        aria-label="Zaid AI Agency — Home"
+        aria-label="Z Agency — Home"
         onClick={(e) => {
           if (window.location.pathname === "/") {
             e.preventDefault();
@@ -34,11 +34,11 @@ export default function Navbar() {
         }}
       >
         <Image
-          src="/zaid-logo.png"
-          alt="Zaid AI Agency Logo"
-          width={180}
-          height={60}
-          className="h-[38px] sm:h-12 w-auto object-contain"
+          src="/z-logo.png"
+          alt="Z Agency Logo"
+          width={600}
+          height={485}
+          className="h-[26px] sm:h-8 w-auto object-contain"
           priority
         />
       </Link>

@@ -218,7 +218,7 @@ export default function HeroSection() {
         <p
           className="entry-fade-soft entry-d-500 font-walsheim text-white/55 text-[15px] md:text-lg max-w-md leading-[1.6] sm:leading-[1.7] mt-6 sm:mt-9 font-normal"
         >
-          We design websites, build SaaS platforms, and deploy autonomous AI agents that turn attention into revenue.
+          We design websites, build SaaS platforms, run ads, and deploy autonomous AI agents that turn attention into revenue.
         </p>
 
         <div

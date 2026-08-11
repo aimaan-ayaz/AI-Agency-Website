@@ -19,7 +19,7 @@ const Studio = dynamic(() => import("@/components/fashion/Studio"), {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/zaid-wordmark.png"
-        alt="ZAID"
+        alt="Z Agency"
         className="h-6 w-auto animate-pulse"
         style={{ filter: "brightness(0)" }}
       />
